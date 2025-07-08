@@ -1,7 +1,28 @@
+import { useState } from "react";
+import axios from "axios";
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("form submit");
+    const emailError = document.querySelector(".emailError");
+    axios({
+      method: "POST",
+      url: `${import.meta.env.VITE_BACKEND_URL}api/auth/login`,
+      withCredentials: true,
+      data: {
+        email: email,
+        password: password,
+      },
+    })
+      .then(function (response) {
+        localStorage.setItem("token", response.data.access_token);
+        window.location.href = "/home";
+      })
+      .catch((err) => {
+        (emailError.innertHTML = "Email or password incorrect"),
+          console.log(err);
+      });
   };
   return (
     <>
@@ -30,10 +51,15 @@ export default function Login() {
                   name="email"
                   type="email"
                   required
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                   autoComplete="email"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
+              <span className="text-red-500 emailError">
+                Email or password incorrect
+              </span>
             </div>
 
             <div>
@@ -51,6 +77,8 @@ export default function Login() {
                   name="password"
                   type="password"
                   required
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                   autoComplete="current-password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
