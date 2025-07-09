@@ -1,27 +1,26 @@
 import { useState } from "react";
 import axios from "axios";
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     const emailError = document.querySelector(".emailError");
     axios({
       method: "POST",
-      url: `${import.meta.env.VITE_BACKEND_URL}api/auth/login`,
+      url: `${import.meta.env.VITE_BACKEND_URL}api/auth/register`,
       withCredentials: true,
       data: {
         email: email,
         password: password,
       },
     })
-      .then(function (response) {
-        localStorage.setItem("token", response.data.access_token);
-        window.location.href = "/home";
+      .then(function () {
+        window.location.href = "/login";
       })
       .catch((err) => {
-        (emailError.innerHTML = "Email or password incorrect"),
-          console.log(err);
+        emailError.innerHTML = "Email or password incorrect";
+        console.log(err);
       });
   };
   return (
@@ -32,12 +31,12 @@ export default function Login() {
             Milo
           </h1>
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Sign in to your account
+            Sign Up to your account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleLogin}>
+          <form className="space-y-6" onSubmit={handleRegister}>
             <div>
               <label
                 htmlFor="email"
@@ -88,18 +87,18 @@ export default function Login() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                Sign Up
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-            D'ont have an account ?{" "}
+            Do you have an account ?{" "}
             <a
-              href="/register"
+              href="/login"
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
-              Sign Up
+              Sign In
             </a>
           </p>
         </div>
