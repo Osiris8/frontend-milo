@@ -61,8 +61,43 @@ export default function Home() {
     }
   };
 
-  function DisplayAndEditPrompt(id, onDelete, onUpdate) {
-    const [editPrompt, setEditPrompt] = useState(id.id.prompt);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/mistral/prompt/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setHistory(history.filter((id) => id.id !== id));
+      fetchPrompts();
+    } catch (err) {
+      console.error("Error to delete a prompt", err);
+    }
+  };
+
+  const handleUpdate = async (id, newPrompt) => {
+    try {
+      const aiType = isMistralAI ? "mistral" : "groqai";
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}api/${aiType}/prompt/${id}`,
+        { prompt: newPrompt },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      fetchPrompts();
+    } catch (err) {
+      console.error("Error to update a prompt", err);
+    }
+  };
+
+  function DisplayAndEditPrompt({ id, onDelete, onUpdate }) {
+    const [editPrompt, setEditPrompt] = useState(id.prompt);
     const [isEditing, setIsEditing] = useState(false);
 
     return (
@@ -76,7 +111,7 @@ export default function Home() {
                 onChange={(e) => setEditPrompt(e.target.value)}
               />
             ) : (
-              <div> {id.id.prompt}</div>
+              <div> {id.prompt}</div>
             )}
           </div>
         </div>
@@ -111,9 +146,7 @@ export default function Home() {
         </div>
         <div className="mb-4 flex justify-start">
           <div className="max-w-xl text-start">
-            <p className="text-gray-700 whitespace-pre-line">
-              {id.id.response}
-            </p>
+            <p className="text-gray-700 whitespace-pre-line">{id.response}</p>
           </div>
         </div>
       </div>
@@ -131,9 +164,24 @@ export default function Home() {
 
         <div className="w-full max-w-2xl space-y-4">
           {history.map((item) => (
-            <DisplayAndEditPrompt key={item.id} id={item} />
+            <DisplayAndEditPrompt
+              key={item.id}
+              id={item}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+            />
           ))}
         </div>
+
+        {loading && (
+          <div className="w-full max-w-2xl space-y-4">
+            <div className="flex justify-start">
+              <div className="max-w-sm p-3 rounded-lg bg-gray-200 mb-6">
+                Typing...
+              </div>
+            </div>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="relative w-full">
