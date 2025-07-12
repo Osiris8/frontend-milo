@@ -2,7 +2,6 @@ import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
 import { Send, SquarePen, Trash } from "lucide-react";
 import axios from "axios";
-import { use } from "react";
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [history, setHistory] = useState([]);
