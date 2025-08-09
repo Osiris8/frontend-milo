@@ -212,7 +212,7 @@ export default function Home() {
                   setIsGroqAI(false);
                   setIsMistralAI(true);
                 }}
-                className="absolute bottom-2 right-2 mr-10 p-1 btn btn-active btn-secondary"
+                className="absolute bottom-2 right-2 mr-10 p-1 btn btn-active bg-pink-700"
               >
                 Mistral AI
               </button>
@@ -222,7 +222,7 @@ export default function Home() {
                   setIsGroqAI(true);
                   setIsMistralAI(false);
                 }}
-                className="absolute bottom-2 right-2 mr-30 p-1 btn btn-active btn-primary"
+                className="absolute bottom-2 right-2 mr-30 p-1 btn btn-active bg-indigo-900"
               >
                 GroqAI
               </button>
