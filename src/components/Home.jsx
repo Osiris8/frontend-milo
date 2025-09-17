@@ -2,6 +2,11 @@ import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
 import { Send, SquarePen, Trash } from "lucide-react";
 import axios from "axios";
+import Markdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import remarkGfm from "remark-gfm";
+import ReactMarkdown from "react-markdown";
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [history, setHistory] = useState([]);
@@ -145,7 +150,40 @@ export default function Home() {
         </div>
         <div className="mb-4 flex justify-start">
           <div className="max-w-xl text-start">
-            <p className="text-gray-700 whitespace-pre-line">{id.response}</p>
+            <div className="prose prose-invert lg:prose-xl max-w-none">
+              <ReactMarkdown
+                children={id.response}
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  code({ node, inline, className, children, ...props }) {
+                    const match = /language-(\w+)/.exec(className || "");
+                    return !inline && match ? (
+                      <SyntaxHighlighter
+                        {...props}
+                        PreTag="div"
+                        language={match[1]}
+                        style={atomDark}
+                        customStyle={{
+                          borderRadius: "0.5rem",
+                          padding: "1rem",
+                          fontSize: "0.9rem",
+                          background: "#1e1e2e",
+                        }}
+                      >
+                        {String(children).replace(/\n$/, "")}
+                      </SyntaxHighlighter>
+                    ) : (
+                      <code
+                        {...props}
+                        className="bg-gray-800 text-red-400 px-1.5 py-0.5 rounded text-sm font-mono"
+                      >
+                        {children}
+                      </code>
+                    );
+                  },
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
