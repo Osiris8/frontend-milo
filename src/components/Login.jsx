@@ -3,8 +3,10 @@ import axios from "axios";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const handleLogin = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const emailError = document.querySelector(".emailError");
     axios({
       method: "POST",
@@ -17,6 +19,7 @@ export default function Login() {
     })
       .then(function (response) {
         localStorage.setItem("token", response.data.access_token);
+        setIsLoading(false);
         window.location.href = "/home";
       })
       .catch((err) => {
@@ -34,6 +37,11 @@ export default function Login() {
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
             Sign in to your account
           </h2>
+          {isLoading ? (
+            <h3 className="mt-2 text-center">connection in progress....</h3>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
