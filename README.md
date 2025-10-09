@@ -1,24 +1,24 @@
-# 🧠 Milo – Fullstack AI Assistant (Frontend)
+# Milo – Fullstack AI Assistant (Frontend)
 
 **Milo** is a powerful fullstack AI assistant application built with **React**, **Flask**, **JWT Authentication**, and advanced **Groq Cloud** AI models, including **Mistral**, **Gemma**, **LLaMA**, and **DeepSeek**. This repository houses the **frontend**, crafted with **React**, **Vite**, and **Tailwind CSS** for a fast, responsive, and modern user experience.
 
-🌐 **Live Demo**: [https://frontend-milo.vercel.app/](https://frontend-milo.vercel.app/)
+**Live Demo**: [https://frontend-milo.vercel.app/](https://frontend-milo.vercel.app/)
 
-📽️ **Watch the Full Demo**: [Milo AI Assistant Demo](https://www.youtube.com/watch?v=_PZHRUFZDpE)
-
----
-
-## ✨ Features
-
-- ⚡ Blazing-fast frontend powered by **Vite** and **React**.
-- 🎨 Sleek, responsive UI styled with **Tailwind CSS**.
-- 🔒 Secure user authentication with **JWT**.
-- 🧠 AI-powered interactions via **Groq Cloud** models.
-- 📡 Seamless integration with the Flask backend.
+**Watch the Full Demo**: [Milo AI Assistant Demo](https://www.youtube.com/watch?v=_PZHRUFZDpE)
 
 ---
 
-## 🚀 Getting Started
+## Features
+
+- Blazing-fast frontend powered by **Vite** and **React**.
+- Sleek, responsive UI styled with **Tailwind CSS**.
+- Secure user authentication with **JWT**.
+- AI-powered interactions via **Groq Cloud** models.
+- Seamless integration with the Flask backend.
+
+---
+
+## Getting Started
 
 Follow these steps to set up the frontend locally.
 
@@ -53,15 +53,15 @@ Open your browser and visit: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🛠️ Backend Setup
+## Backend Setup
 
 The backend, built with **Flask**, handles authentication, routing, and AI logic. To set it up, follow the instructions in the backend repository:
 
-🌐 **Backend Repository**: [https://github.com/Osiris8/backend-milo](https://github.com/Osiris8/backend-milo)
+**Backend Repository**: [https://github.com/Osiris8/backend-milo](https://github.com/Osiris8/backend-milo)
 
 ---
 
-## 📚 Tech Stack
+## Tech Stack
 
 - **Frontend**: React, Vite, Tailwind CSS
 - **Backend**: Flask, JWT Authentication
@@ -70,7 +70,7 @@ The backend, built with **Flask**, handles authentication, routing, and AI logic
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -82,10 +82,10 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📬 Contact
+## Contact
 
 Have questions or suggestions? Connect on [X](https://x.com/migan_osiris).
 
 ---
 
-⭐ **Star this repo if you find it useful!**
+**Star this repo if you find it useful!**
